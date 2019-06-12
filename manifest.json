@@ -1,0 +1,17 @@
+{
+  "name"              : "My Favorite",
+  "short_name"        : "MF-4",
+  "description"       : "my favorite app",
+  "start_url"         : "index.html",
+  "display"           : "standalone",
+  "orientation"       : "any",
+  "background_color"  : "#ACE",
+  "theme_color"       : "#ACE",
+  "icons": [
+    {
+      "src"           : "/static/favorite.png",
+      "sizes"         : "96x96",
+      "type"          : "image/png"
+    }
+  ]
+}

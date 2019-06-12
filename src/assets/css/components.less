@@ -1,0 +1,46 @@
+.app-card {
+  padding: 20px;
+  box-shadow: 0 2px 12px 0 rgba(0,0,0,.1);
+  border: 1px solid #ebeef5;
+  border-radius: 4px;
+  background-color: #ffffff;
+}
+
+.app-loading {
+  display: block;
+  margin-top: 50px;
+  &:before{
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    margin: auto;
+    content: '';
+    width: 100px;
+    height: 100px;
+    display: inline-block;
+    background: url("../img/loading.svg") no-repeat;
+    background-size: 100%;
+    background-position: center center;
+  }
+}
+
+.app-ellipsis-1 {
+  overflow: hidden;
+  text-overflow:ellipsis;
+  white-space: nowrap;
+}
+.app-ellipsis-2 {
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2;
+  overflow: hidden;
+}
+
+.app-ellipsis-3 {
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 3;
+  overflow: hidden;
+}
