@@ -1,10 +1,9 @@
 const path = require('path');
-const webpack = require('webpack');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const CopyWebpackPlugin = require('copy-webpack-plugin');
 const HappyPack = require('happypack');
 const DllReferencePlugin = require('webpack/lib/DllReferencePlugin');
-var OfflinePlugin = require('offline-plugin');
+const WorkboxPlugin = require('workbox-webpack-plugin');
 const env = process.env.NODE_ENV;
 
 const basePath = 'static/';
@@ -105,13 +104,32 @@ module.exports = {
     new DllReferencePlugin({
       manifest: require('./vendor-manifest.json'),
     }),
-    new OfflinePlugin({
-      externals: [
-        '/manifest.json',
-        '/static/js/vendor.dll.js',
-        'http://at.alicdn.com/t/font_839093_dwu043pw38.css'
+    new WorkboxPlugin.GenerateSW({
+      cacheId: 'webpack-pwa', // 设置前缀
+      skipWaiting: true, // 强制等待中的 Service Worker 被激活
+      clientsClaim: true, // Service Worker 被激活后使其立即获得页面控制权
+      // swDest: 'service-worker.js', // 输出 Service worker 文件
+      // globDirectory: './',
+      importWorkboxFrom: 'local', // 设置从本地加载workbox而不是cdn（这个cdn需要梯子）
+      globIgnores: ['service-worker.js'], // 忽略的文件
+      runtimeCaching: [
+        {
+          // iconfont
+          urlPattern: new RegExp('^http://at.alicdn.com'),
+          handler: 'staleWhileRevalidate',
+          options: {
+            cacheableResponse: {
+              statuses: [0, 200]
+            }
+          }
+        },
+        {
+          // 其他静态资源
+          urlPattern: new RegExp('/static/'),
+          handler: 'CacheFirst'
+        }
       ]
-    })
+    }),
   ]
 };
 

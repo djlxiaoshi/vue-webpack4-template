@@ -5,6 +5,7 @@ import App from './App';
 import router from './router';
 import store from './store/index';
 import '@/assets/js/init';
+import '@/assets/js/register-sw'; // 注册Service Worker
 
 Vue.config.productionTip = false;
 

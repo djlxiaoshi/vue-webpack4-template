@@ -10,7 +10,7 @@
   "icons": [
     {
       "src"           : "/static/favorite.png",
-      "sizes"         : "96x96",
+      "sizes"         : "144x144",
       "type"          : "image/png"
     }
   ]

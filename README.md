@@ -14,7 +14,7 @@
 
 实现功能
 
-- 尾部pack4基本配置
+- webpack4基本配置
 - webpack4的优化
 - pwa
 - axios封装
@@ -22,5 +22,9 @@
 - 基本公共组件的封装
 - 数据mock功能
 
-
 参考脚手架：
+
+pwa 参考文章 https://zhuanlan.zhihu.com/p/67893712
+https://blog.csdn.net/mjzhang1993/article/details/79584854
+
+[workbox-webpack-plugin 配置文档](https://developers.google.com/web/tools/workbox/modules/workbox-webpack-plugin)

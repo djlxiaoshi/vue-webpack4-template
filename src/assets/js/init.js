@@ -24,9 +24,6 @@ import 'element-ui/lib/theme-chalk/display.css';
 import '../css/common.less';
 import 'nprogress/nprogress.css';
 
-import * as OfflinePluginRuntime from 'offline-plugin/runtime';
-OfflinePluginRuntime.install();
-
 Vue.use(Button);
 Vue.use(Menu);
 Vue.use(Submenu);
