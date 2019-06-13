@@ -7,6 +7,8 @@ import Router from 'vue-router';
 import http from './utils/http';
 import envConfig from './global/environment';
 import sweetAlert from 'assets/js/utils/alert.js';
+import upperFirst from 'lodash/upperFirst';
+import camelCase from 'lodash/camelCase';
 
 // Element-UI组件按需加载
 import { Button, Menu, MenuItem, Submenu, Input,
@@ -15,8 +17,6 @@ import { Button, Menu, MenuItem, Submenu, Input,
   MessageBox, Notification, Message, Loading, Pagination, Dialog,
   Radio, RadioGroup, Select, Option
 } from 'element-ui';
-
-import Empty from 'components/common/empty/Empty';
 
 import 'izitoast/dist/css/iziToast.css';
 import 'element-ui/lib/theme-chalk/index.css';
@@ -48,9 +48,6 @@ Vue.use(RadioGroup);
 Vue.use(Select);
 Vue.use(Option);
 
-// 自定义全局公共组件
-Vue.component('Empty', Empty);
-
 Vue.use(Router);
 
 Vue.prototype.$loading = Loading.service;
@@ -61,3 +58,38 @@ Vue.prototype.$message = Message;
 Vue.prototype.$http = http;
 Vue.prototype.$alert = sweetAlert;
 Vue.prototype.$globalConfig = envConfig;
+
+// 自动化注册全局组件
+const requireComponent = require.context(
+  // 其组件目录的相对路径
+  '../../components/common',
+  // 是否查询其子目录
+  true,
+  // 匹配基础组件文件名的正则表达式
+  /[A-Z]\w+\.(vue|js)$/
+);
+
+requireComponent.keys().forEach(fileName => {
+  // 获取组件配置
+  const componentConfig = requireComponent(fileName);
+
+  const regexp = /.+\/(.+)\./;
+  // 剥去文件名开头的 `'./` 和结尾的扩展名
+  fileName = regexp.exec(fileName)[1];
+
+  // 获取组件的 PascalCase 命名
+  const componentName = upperFirst(
+    camelCase(
+  // 剥去文件名开头的 `./` 和结尾的扩展名
+      fileName
+    )
+  );
+  // 全局注册组件
+  Vue.component(
+    componentName,
+    // 如果这个组件选项是通过 `export default` 导出的，
+    // 那么就会优先使用 `.default`，
+    // 否则回退到使用模块的根。
+    componentConfig.default || componentConfig
+  );
+});

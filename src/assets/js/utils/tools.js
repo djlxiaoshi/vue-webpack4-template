@@ -18,3 +18,21 @@ export function formatData (params) {
 export function randomNum (num) {
   return Math.floor(Math.random() * (num + 1));
 }
+
+/**
+ * 是否是空对象
+ * @param obj
+ * @returns {boolean}
+ */
+function isNullObject (obj) {
+  if (Object.keys) {
+    return Object.keys(obj).length > 0;
+  } else {
+    for (let i in obj) {
+      if (Object.hasOwnProperty(i)) {
+        return true;
+      }
+    }
+    return false;
+  }
+}
