@@ -40,7 +40,6 @@
   import HeaderMenu from './Menu';
   import { mapState, mapMutations } from 'vuex';
   import { ACTIVE_MENU, SET_USER_INFO } from 'store/mutation-types';
-
   export default {
     components: {
       HeaderMenu
@@ -60,6 +59,7 @@
       ])
     },
     mounted () {
+      console.log('menuList', this.menuList);
     },
     methods: {
       ...mapMutations({

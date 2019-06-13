@@ -5,6 +5,7 @@ const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 const OptimizeCSSAssetsPlugin = require("optimize-css-assets-webpack-plugin");
 const UglifyJsPlugin = require("uglifyjs-webpack-plugin");
 const HappyPack = require('happypack');
+const WorkboxPlugin = require('workbox-webpack-plugin');
 const happyThreadPool = HappyPack.ThreadPool({ size: 4 });
 
 const basePath = 'static/';
@@ -43,6 +44,31 @@ module.exports = WebpackMerge(baseConfig, {
       id: 'less',
       threadPool: happyThreadPool,
       loaders: ['css-loader', 'postcss-loader', 'less-loader']
+    }),
+    new WorkboxPlugin.GenerateSW({
+      cacheId: 'webpack-pwa', // 设置前缀
+      skipWaiting: true, // 强制等待中的 Service Worker 被激活
+      clientsClaim: true, // Service Worker 被激活后使其立即获得页面控制权
+      // swDest: 'service-worker.js', // 输出 Service worker 文件
+      // globDirectory: './',
+      importWorkboxFrom: 'local', // 设置从本地加载workbox而不是cdn（这个cdn需要梯子）
+      runtimeCaching: [
+        {
+          // iconfont
+          urlPattern: new RegExp('^http://at.alicdn.com'),
+          handler: 'staleWhileRevalidate',
+          options: {
+            cacheableResponse: {
+              statuses: [0, 200]
+            }
+          }
+        },
+        {
+          // 其他静态资源
+          urlPattern: new RegExp('/static/'),
+          handler: 'CacheFirst'
+        }
+      ]
     })
   ],
   optimization: {
