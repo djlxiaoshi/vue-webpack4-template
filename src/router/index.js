@@ -23,7 +23,7 @@ import Router from 'vue-router';
 import App from '../App';
 import UserLogin from 'pages/login/Index';
 import UserRegister from 'pages/register/Index';
-import NotFoundPage from 'components/common/exception/Exception';
+import NotFoundPage from 'components/common/app-exception/AppException';
 import AppFramework from 'pages/Index';
 
 import appRoutes from './app';
@@ -35,7 +35,6 @@ let routes = [
     path: '/app',
     component: AppFramework,
     children: appRoutes
-
   },
   {
     path: '/login',

@@ -9,15 +9,16 @@
 - 状态管理：Vuex
 - ajax库：axios
 - 日期格式化库：dayjs
+- 工具库：lodash
 
 项目目录结构
 
 实现功能
 
-- webpack4基本配置
-- webpack4的优化
-- pwa
-- axios封装
+- [x] webpack4基本配置
+- [x] webpack4的优化
+- [x] pwa
+- [x] axios封装
 - 路由权限管理
 - 基本公共组件的封装
 - 数据mock功能
@@ -28,3 +29,9 @@ pwa 参考文章 https://zhuanlan.zhihu.com/p/67893712
 https://blog.csdn.net/mjzhang1993/article/details/79584854
 
 [workbox-webpack-plugin 配置文档](https://developers.google.com/web/tools/workbox/modules/workbox-webpack-plugin)
+
+
+
+json-server 使用参考文档
+
+[json-server进阶](https://www.imooc.com/article/details/id/44976)
