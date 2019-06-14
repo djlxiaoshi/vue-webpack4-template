@@ -1,6 +1,6 @@
 <template>
   <el-menu
-    class="menu"
+    class="app-header-menu"
     :background-color="backgroundColor"
     :text-color="textColor"
     :active-text-color="activeTextColor"
@@ -21,7 +21,7 @@
 
 <script>
   import { mapMutations } from 'vuex';
-  import { ACTIVE_MENU } from 'store/mutation-types';
+  import { SET_ACTIVE_MENU } from 'store/mutation-types';
 
   export default {
     props: {
@@ -53,7 +53,7 @@
     },
     methods: {
       ...mapMutations({
-        'setActiveMenu': ACTIVE_MENU
+        'setActiveMenu': SET_ACTIVE_MENU
       }),
       handleSelect (key) {
         // this.setActiveMenu(key);
@@ -63,8 +63,9 @@
 </script>
 
 <style scoped lang="less">
-  .menu {
+  .app-header-menu {
     border-right: none;
+    border-bottom: none;
     height: 100%;
   }
 </style>

@@ -1,7 +1,9 @@
 <template>
     <div>
       <AppHeader></AppHeader>
-      <router-view></router-view>
+      <div class="app-body common-container">
+        <router-view></router-view>
+      </div>
     </div>
 </template>
 
@@ -16,6 +18,8 @@
   };
 </script>
 
-<style scoped>
-
+<style scoped lang="less">
+  .app-body {
+    margin-top: 20px;
+  }
 </style>

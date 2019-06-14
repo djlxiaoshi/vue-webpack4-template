@@ -1,3 +1,6 @@
+/**
+ * 生成数据源
+ */
 const path = require('path');
 const fs = require('fs');
 const basePath = './data';

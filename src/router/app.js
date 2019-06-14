@@ -5,7 +5,8 @@ export default [
   {
     path: 'home',
     label: '主页',
-    component: HomePage
+    component: HomePage,
+    meta: { permissionList: [ 0, 1, 2, 3 ] }
   },
   {
     path: 'about',

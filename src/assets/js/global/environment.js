@@ -6,7 +6,7 @@
 let environment = {};
 
 const development = {
-  SERVER_ADDRESS: 'http://localhost:3000' // 开发环境后端接口地址
+  SERVER_ADDRESS: 'http://localhost:3700' // 开发环境后端接口地址
 };
 
 const test = {

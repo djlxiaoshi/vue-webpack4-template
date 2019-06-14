@@ -1,11 +1,7 @@
 <template>
   <div class="exception-page">
-    <div>
-      <img :src="exceptionImg">
-      <div class="exception-text">
-        <h1 class="exception-desc">{{ desc }}</h1>
-      </div>
-    </div>
+    <img :src="exceptionConfig.exceptionImg">
+    <h1 class="exception-desc">{{ exceptionConfig.desc }}</h1>
   </div>
 </template>
 
@@ -14,37 +10,45 @@
   import NoPermissionImg from './img/no-permission-exception.svg';
   import ServerExceptionImg from './img/server-exception.svg';
 
+  const exceptionConfig = {
+    500: {
+      exceptionImg: ServerExceptionImg,
+      desc: '服务器异常'
+    },
+    404: {
+      exceptionImg: NotFoundImg,
+      desc: '404!!!页面不见了'
+    },
+    403: {
+      exceptionImg: NoPermissionImg,
+      desc: '无访问权限'
+    }
+  };
+
   export default {
     name: '',
     data () {
       return {
-        exceptionImg: NotFoundImg
+        exceptionConfig: {}
       };
     },
     props: {
       type: {
-
-      },
-      desc: {
-        type: String,
-        default: '404!!!页面不见了'
+        type: Number,
+        default: 404
+      }
+    },
+    mounted () {
+      this.handleExceptionType(this.type);
+    },
+    methods: {
+      handleExceptionType (type) {
+        this.exceptionConfig = exceptionConfig[type];
       }
     },
     watch: {
       type (value) {
-        switch (value) {
-          case 404:
-            this.exceptionImg = NotFoundImg;
-            break;
-          case 503:
-            this.exceptionImg = NoPermissionImg;
-            break;
-          case 500:
-            this.exceptionImg = ServerExceptionImg;
-            break;
-          default:
-            this.exceptionImg = NotFoundImg;
-        }
+        this.handleExceptionType(value);
       }
     }
   };
@@ -53,15 +57,15 @@
 <style scoped lang="less">
   .exception-page {
     width: 100%;
-    height: 100%;
+    height: 100vh;
     display: flex;
     align-items: center;
     justify-content: center;
+    flex-direction: column;
     .exception-desc {
       margin: 40px 0;
       font-weight: 700;
       font-size: 20px;
-      text-align: center;
       color: #bac8c4;
     }
   }

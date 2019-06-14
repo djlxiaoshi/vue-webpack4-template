@@ -19,9 +19,9 @@
 - [x] webpack4的优化
 - [x] pwa
 - [x] axios封装
-- 路由权限管理
+- [x] 路由权限管理
 - 基本公共组件的封装
-- 数据mock功能
+- [x] 数据mock功能
 
 参考脚手架：
 
@@ -35,3 +35,5 @@ https://blog.csdn.net/mjzhang1993/article/details/79584854
 json-server 使用参考文档
 
 [json-server进阶](https://www.imooc.com/article/details/id/44976)
+[上手玩一下 json-server（一）了解篇](https://www.jianshu.com/p/bdbbd3314cf3)
+[json-server 详解](https://www.cnblogs.com/fly_dragon/p/9150732.html)

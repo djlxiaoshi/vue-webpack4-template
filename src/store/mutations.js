@@ -3,7 +3,7 @@
  */
 
 import {
-  SET_USER_INFO, SET_MENU_LIST
+  SET_USER_INFO, SET_MENU_LIST, SET_ACTIVE_MENU
 } from './mutation-types';
 
 export default {
@@ -12,5 +12,8 @@ export default {
   },
   [SET_MENU_LIST] (state, menuList) {
     state.menuList = menuList;
+  },
+  [SET_ACTIVE_MENU] (state, activeMenu) {
+    state.activeMenu = activeMenu;
   }
 };

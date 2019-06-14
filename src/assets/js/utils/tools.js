@@ -24,7 +24,7 @@ export function randomNum (num) {
  * @param obj
  * @returns {boolean}
  */
-function isNullObject (obj) {
+export function isNullObject (obj) {
   if (Object.keys) {
     return Object.keys(obj).length > 0;
   } else {
