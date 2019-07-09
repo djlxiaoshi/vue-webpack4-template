@@ -56,7 +56,8 @@
         'setActiveMenu': SET_ACTIVE_MENU
       }),
       handleSelect (key) {
-        // this.setActiveMenu(key);
+        this.$emit('menuSelect', key);
+        this.setActiveMenu(key);
       }
     }
   };

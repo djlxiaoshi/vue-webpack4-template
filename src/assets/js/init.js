@@ -9,6 +9,7 @@ import envConfig from './global/environment';
 import sweetAlert from 'assets/js/utils/alert.js';
 import upperFirst from 'lodash/upperFirst';
 import camelCase from 'lodash/camelCase';
+import './resize';
 
 // Element-UI组件按需加载
 import { Button, Menu, MenuItem, Submenu, Input,

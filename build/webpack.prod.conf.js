@@ -9,6 +9,7 @@ const WorkboxPlugin = require('workbox-webpack-plugin');
 const happyThreadPool = HappyPack.ThreadPool({ size: 4 });
 
 const basePath = 'static/';
+const SERVICE_WORKER_VERSION = new Date().getTime();
 
 module.exports = WebpackMerge(baseConfig, {
   mode: 'production',
@@ -46,7 +47,8 @@ module.exports = WebpackMerge(baseConfig, {
       loaders: ['css-loader', 'postcss-loader', 'less-loader']
     }),
     new WorkboxPlugin.GenerateSW({
-      cacheId: 'webpack-pwa', // 设置前缀
+      // cacheId: `pwa-version-${ SERVICE_WORKER_VERSION }`, // 设置前缀
+      cacheId: 'pwa-version', // 设置前缀
       skipWaiting: true, // 强制等待中的 Service Worker 被激活
       clientsClaim: true, // Service Worker 被激活后使其立即获得页面控制权
       // swDest: 'service-worker.js', // 输出 Service worker 文件
@@ -56,7 +58,7 @@ module.exports = WebpackMerge(baseConfig, {
         {
           // iconfont
           urlPattern: new RegExp('^http://at.alicdn.com'),
-          handler: 'staleWhileRevalidate',
+          handler: 'CacheFirst',
           options: {
             cacheableResponse: {
               statuses: [0, 200]

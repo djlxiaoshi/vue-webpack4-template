@@ -23,6 +23,18 @@
 - 基本公共组件的封装
 - [x] 数据mock功能
 
+### Bug List
+
+- [] pwa 开发环境不开启
+- [] 初始页有两个loading
+- [] webpack 没有报错提示
+
+### 待完成
+
+- [] 预渲染
+- [] 骨架屏
+
+
 参考脚手架：
 
 pwa 参考文章 https://zhuanlan.zhihu.com/p/67893712

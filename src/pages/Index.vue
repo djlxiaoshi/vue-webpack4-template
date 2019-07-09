@@ -8,7 +8,7 @@
 </template>
 
 <script>
-  import AppHeader from 'components/core/header/Index';
+  import AppHeader from 'components/core/header/AppHeader';
 
   export default {
     name: '',

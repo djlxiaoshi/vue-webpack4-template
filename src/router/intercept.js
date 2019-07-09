@@ -61,7 +61,8 @@ export default function (router) {
           store.commit(SET_MENU_LIST, result ? (result.menu || []) : []);
         } catch (e) {
           console.error('服务器异常', e);
-          next('/server-exception');
+          // next('/server-exception'); // 由于有pwa
+          next();
         }
       }
 

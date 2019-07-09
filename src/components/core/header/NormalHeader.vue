@@ -58,13 +58,14 @@
     methods: {
       ...mapMutations({
         'setActiveMenu': SET_ACTIVE_MENU,
-        'setUserMsg': SET_USER_INFO
+        'setUserInfo': SET_USER_INFO
       }),
       eventHandler (event) {
         if (event === 'logout') {
           this.logout();
         } else if (event === 'userInfo') {
-          this.$router.push('/user/info');
+          this.$router.push('/app/user-info');
+          this.setActiveMenu('');
         }
       },
       logout () {
@@ -85,7 +86,7 @@
         }
       },
       clearUserMsg () {
-        this.setUserMsg(null);
+        this.setUserInfo(null);
       },
       goToLoginPage () {
         this.$router.push('/login');
@@ -112,29 +113,29 @@
 
     }
 
-      .header-right {
-        flex: 0 0 40px;
-        .avatar-wrap {
-          .user-avatar {
-            display: inline-block;
-            overflow: hidden;
-            width: 40px;
-            height: 40px;
-            border-radius: 50%;
-            border: 2px solid #e5e5e5;
-            cursor: pointer;
-          }
+    .header-right {
+      flex: 0 0 40px;
+      .avatar-wrap {
+        .user-avatar {
+          display: inline-block;
+          overflow: hidden;
+          width: 40px;
+          height: 40px;
+          border-radius: 50%;
+          border: 2px solid #e5e5e5;
+          cursor: pointer;
         }
-        .login-or-register {
-          .register-btn, .login-btn {
-            color: #ffffff;
-            padding: 0 5px 5px 5px;
-            &:hover {
-              color: rgb(255, 208, 75);
-            }
+      }
+      .login-or-register {
+        .register-btn, .login-btn {
+          color: #ffffff;
+          padding: 0 5px 5px 5px;
+          &:hover {
+            color: rgb(255, 208, 75);
           }
         }
       }
     }
+  }
 
 </style>

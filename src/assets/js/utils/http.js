@@ -6,6 +6,7 @@ import router from '../../../router/index';
 
 let xhrCacheList = [];
 const CancelToken = axios.CancelToken;
+const prefix = '/api';
 
 // 请求发送拦截
 axios.interceptors.request.use(function (config) {
@@ -25,7 +26,7 @@ export default function Http (config) {
   const obj = {};
   const axiosConfig = {
     method: config.method || 'get',
-    url: envConfig.SERVER_ADDRESS + config.url,
+    url: envConfig.SERVER_ADDRESS + prefix + config.url,
     withCredentials: config.withCredentials || true,
     headers: Object.assign({}, { 'Content-Type': 'application/json' }, config.headers),
     cancelToken: new CancelToken(function executor (cancel) {

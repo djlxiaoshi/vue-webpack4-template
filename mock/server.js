@@ -1,7 +1,6 @@
 const jsonServer = require('json-server');
 const db = require('./db');
-const customRes = require('./custom');
-
+const routes = require('./routes');
 const server = jsonServer.create();
 const router = jsonServer.router(db());
 const middlewares = jsonServer.defaults();
@@ -11,8 +10,8 @@ server.use(middlewares);
 // 当请求方式为POST/PUT/PATCH 的时候，要将数据进行转换
 server.use(jsonServer.bodyParser);
 
-// 用户自定义返回
-customRes(server);
+// 重写路由
+server.use(jsonServer.rewriter(routes));
 
 router.render = (req, res) => {
   res.jsonp({

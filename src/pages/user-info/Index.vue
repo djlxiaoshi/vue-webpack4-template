@@ -61,7 +61,7 @@
 
 <script>
   import { mapMutations } from 'vuex';
-  import { SET_USER_MSG } from 'store/mutation-types';
+  import { SET_USER_INFO } from 'store/mutation-types';
 
     export default {
         data () {
@@ -100,7 +100,7 @@
         },
       created () {
         const { xhrInstance } = this.$http({
-          url: '/user',
+          url: '/users/1',
           method: 'get',
           showErrorMsg: true
         });
@@ -111,13 +111,13 @@
       },
       methods: {
         ...mapMutations({
-          'setUserMsg': SET_USER_MSG
+          'setUserInfo': SET_USER_INFO
         }),
         handleSuccess (res) {
           // 由于七牛云采用的同名覆盖，覆盖上传后，路径不会变化，所以在这里用时间戳进行强制刷新
           this.$set(this.user, 'avatar', res.data.path + '?v=' + new Date().getTime());
           // 更新vuex 中用户信息
-          this.setUserMsg(this.user);
+          this.setUserInfo(this.user);
           this.$notify.success('上传成功');
         },
         beforeAvatarUpload (file) {
@@ -142,7 +142,7 @@
               this.updateUserInfo().then(user => {
 
                 // 更新vuex store中用户信息
-                this.setUserMsg(Object.assign(this.user, user));
+                this.setUserInfo(Object.assign(this.user, user));
                 // 重置状态
                 this.resetStatus();
               });
@@ -178,7 +178,6 @@
     .user-info-panel {
       margin: 20px auto;
       padding: 20px 50px;
-      width: 500px;
       box-shadow: 0 2px 12px 0 rgba(0, 0, 0, 0.1);
       /deep/ .el-upload {
         text-align: left;

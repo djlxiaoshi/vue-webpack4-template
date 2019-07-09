@@ -3,7 +3,8 @@
  */
 
 import {
-  SET_USER_INFO, SET_MENU_LIST, SET_ACTIVE_MENU
+  SET_USER_INFO, SET_MENU_LIST, SET_ACTIVE_MENU,
+  TOGGLE_IS_MINI_WIDTH
 } from './mutation-types';
 
 export default {
@@ -15,5 +16,8 @@ export default {
   },
   [SET_ACTIVE_MENU] (state, activeMenu) {
     state.activeMenu = activeMenu;
+  },
+  [TOGGLE_IS_MINI_WIDTH] (state, status) {
+    state.isMiniWidth = status;
   }
 };

@@ -10,11 +10,11 @@ const development = {
 };
 
 const test = {
-  SERVER_ADDRESS: 'http://localhost:3000' // 测试环境后端接口地址
+  SERVER_ADDRESS: 'http://localhost:3700' // 测试环境后端接口地址
 };
 
 const production = {
-  SERVER_ADDRESS: 'http://localhost:3000' // 正式环境后端接口地址
+  SERVER_ADDRESS: 'http://localhost:3700' // 正式环境后端接口地址
 };
 
 switch (process.env.NODE_ENV) {
