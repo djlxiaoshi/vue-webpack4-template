@@ -31,6 +31,11 @@
 <style scoped lang="less">
   @import "../../../assets/css/theme";
   .app-header {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 1000;
     height: @AppHeaderHeight;
     background: @pageHeaderBg;
   }

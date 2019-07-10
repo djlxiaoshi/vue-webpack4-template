@@ -3,6 +3,7 @@
     <div class="side-menu-wrap">
       <base-menu
         active-text-color="#ffd04b"
+        :activeMenu="activeMenu"
         @menuSelect = "menuSelect"
         :menuConfig="menuList">
       </base-menu>
@@ -24,7 +25,8 @@
     },
     computed: {
       ...mapState([
-        'menuList'
+        'menuList',
+        'activeMenu'
       ])
     },
     methods: {

@@ -14,10 +14,9 @@ module.exports = Mock.mock({
     'roleId|0-5': 0,
     'email|+1': getArrayData(faker.internet.email, 5),
     'info': Mock.Random.cparagraph(),
-    'menu|2-5': [{
-      'label|+1': getArrayData(faker.name.findName, 5),
-      'value|+1': getArrayData(faker.random.number, 5),
-      'path|+1': getArrayData(faker.random.number, 5)
-    }]
+    'menu': [
+      { label: '主页', path: '/app/home' },
+      { label: '关于我', path: '/app/about' }
+    ]
   }
 });

@@ -1,103 +1,106 @@
 <template>
     <div class="user-info-page">
-      <el-row type="flex" justify="center">
-        <el-col :xs="24" :sm="20" :md="20" :lg="20" :xl="20" class="main-container">
-          <div class="user-info-panel">
-            <el-form
-              ref="form"
-              :rules="rules"
-              :model="user"
-              label-width="80px"
-              label-position="left">
-              <el-form-item label="头像" prop="url">
-                <img class="user-avatar avatar-left" :src="user.avatar" alt="">
-                <div class="avatar-right">
-                  <el-upload
-                    ref="upload"
-                    class="upload-avatar-input"
-                    :action="$globalConfig.SERVER_ADDRESS + '/user/avatar/'"
-                    list-type="text"
-                    :with-credentials="true"
-                    :show-file-list="false"
-                    :before-upload="beforeAvatarUpload"
-                    :on-success="handleSuccess">
-                    <p class="support-desc">支持 jpg、png 格式大小 5M 以内的图片</p>
-                    <el-button class="upload-avatar-btn" size="small">点击上传</el-button>
-                  </el-upload>
-                </div>
-              </el-form-item>
+      <div class="user-info-panel" :style="{
+        marginTop: isMiniWidth ? 0 : '20px'
+      }">
+        <el-form
+          ref="form"
+          :rules="rules"
+          :model="user"
+          label-width="80px"
+          label-position="left">
+          <el-form-item label="头像" prop="url">
+            <img class="user-avatar avatar-left" :src="user.avatar" alt="">
+            <div class="avatar-right">
+              <el-upload
+                ref="upload"
+                class="upload-avatar-input"
+                :action="$globalConfig.SERVER_ADDRESS + '/user/avatar/'"
+                list-type="text"
+                :with-credentials="true"
+                :show-file-list="false"
+                :before-upload="beforeAvatarUpload"
+                :on-success="handleSuccess">
+                <p class="support-desc">支持 jpg、png 格式大小 5M 以内的图片</p>
+                <el-button class="upload-avatar-btn" size="small">点击上传</el-button>
+              </el-upload>
+            </div>
+          </el-form-item>
 
-              <el-form-item label="用户名" prop="username" class="username-input-item">
-                <el-input v-model="user.username" v-if="isEditStatus"></el-input>
-                <p v-else>{{ user.username }}</p>
-              </el-form-item>
+          <el-form-item label="用户名" prop="username" class="username-input-item">
+            <el-input v-model="user.username" v-if="isEditStatus"></el-input>
+            <p v-else>{{ user.username }}</p>
+          </el-form-item>
 
-              <el-form-item label="用户邮箱" prop="email" class="username-input-item">
-                <el-input v-model="user.email" v-if="isEditStatus"></el-input>
-                <p v-else>{{ user.email }}</p>
-              </el-form-item>
+          <el-form-item label="用户邮箱" prop="email" class="username-input-item">
+            <el-input v-model="user.email" v-if="isEditStatus"></el-input>
+            <p v-else>{{ user.email }}</p>
+          </el-form-item>
 
-              <el-form-item label="个人介绍" class="user-info-input-item">
-                <el-input
-                  v-if="isEditStatus"
-                  type="textarea"
-                  :rows="2"
-                  v-model="user.info"
-                >
-                </el-input>
-                <p v-else>{{ user.info }}</p>
-              </el-form-item>
+          <el-form-item label="个人介绍" class="user-info-input-item">
+            <el-input
+              v-if="isEditStatus"
+              type="textarea"
+              :rows="2"
+              v-model="user.info"
+            >
+            </el-input>
+            <p v-else>{{ user.info }}</p>
+          </el-form-item>
 
-              <el-form-item label="">
-                <el-button @click="toggleEditStatus" type="primary" size="small" plain>编辑</el-button>
-                <el-button @click="save" type="success" size="small" plain>保存</el-button>
-              </el-form-item>
-            </el-form>
-          </div>
-        </el-col>
-      </el-row>
+          <el-form-item label="">
+            <el-button @click="toggleEditStatus" type="primary" size="small" plain>编辑</el-button>
+            <el-button @click="save" type="success" size="small" plain>保存</el-button>
+          </el-form-item>
+        </el-form>
+      </div>
     </div>
 </template>
 
 <script>
-  import { mapMutations } from 'vuex';
+  import { mapMutations, mapState } from 'vuex';
   import { SET_USER_INFO } from 'store/mutation-types';
 
     export default {
-        data () {
-          const checkEmail = (rule, value, callback) => {
+      data () {
+        const checkEmail = (rule, value, callback) => {
 
-            value = value.trim();
-            const regexp = /^[a-zA-Z0-9_-]+@[a-zA-Z0-9_-]+(\.[a-zA-Z0-9_-]+)+$/;
-            if (!regexp.test(value)) {
-              callback(new Error('请输入正确的邮箱地址'));
-            } else {
-              callback();
-            }
-          };
+          value = value.trim();
+          const regexp = /^[a-zA-Z0-9_-]+@[a-zA-Z0-9_-]+(\.[a-zA-Z0-9_-]+)+$/;
+          if (!regexp.test(value)) {
+            callback(new Error('请输入正确的邮箱地址'));
+          } else {
+            callback();
+          }
+        };
 
-          return {
-            user: {
-              email: '',
-              username: '',
-              info: ''
-            },
-            isEditStatus: false,
-            rules: {
-              username: [
-                { required: true, trigger: 'blur', message: '请输入用户名' }
-              ],
-              email: [
-                { required: true, trigger: 'blur', message: '请输入邮箱' },
-                { trigger: 'blur', validator: checkEmail }
-              ]
-            },
-            inputStatus: {
-              usernameDisabled: true,
-              infoDisabled: true
-            }
-          };
-        },
+        return {
+          user: {
+            email: '',
+            username: '',
+            info: ''
+          },
+          isEditStatus: false,
+          rules: {
+            username: [
+              { required: true, trigger: 'blur', message: '请输入用户名' }
+            ],
+            email: [
+              { required: true, trigger: 'blur', message: '请输入邮箱' },
+              { trigger: 'blur', validator: checkEmail }
+            ]
+          },
+          inputStatus: {
+            usernameDisabled: true,
+            infoDisabled: true
+          }
+        };
+      },
+      computed: {
+        ...mapState([
+          'isMiniWidth'
+        ])
+      },
       created () {
         const { xhrInstance } = this.$http({
           url: '/users/1',
@@ -176,8 +179,7 @@
 <style scoped lang="less">
   .user-info-page {
     .user-info-panel {
-      margin: 20px auto;
-      padding: 20px 50px;
+      padding: 20px;
       box-shadow: 0 2px 12px 0 rgba(0, 0, 0, 0.1);
       /deep/ .el-upload {
         text-align: left;
@@ -196,6 +198,7 @@
       }
       .avatar-right {
         .support-desc {
+          line-height: 1.5;
           color: #909090;
           font-size: 12px;
         }
