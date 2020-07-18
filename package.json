@@ -21,7 +21,7 @@
     "element-ui": "^2.4.7",
     "gettabledatasize": "^1.1.4",
     "izitoast": "^1.4.0",
-    "lodash": "^4.17.11",
+    "lodash": "^4.17.19",
     "nprogress": "^0.2.0",
     "sweetalert": "^2.1.2",
     "vue": "^2.5.2",
